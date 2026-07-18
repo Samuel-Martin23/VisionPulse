@@ -13,3 +13,6 @@ Free exploration is an important aspect of many engaging virtual reality (VR) ex
 ## Setup
 - Clone this repo
 - Open the folder in Unity Hub
+
+## Repository Notice
+This repository is a mirror of the official organization repository. The official repository can be found here: https://github.com/teal-lab/VisionPulse
