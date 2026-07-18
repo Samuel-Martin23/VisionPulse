@@ -103,11 +103,6 @@ public class VisionPulseResources : GenericSingleton<VisionPulseResources>
         sessionData.SceneResults[sceneName].CompletionTime = completionTime;
     }
 
-    public void AddRegionInSceneData(string sceneName, string regionName)
-    {
-        sessionData.SceneResults[sceneName].RegionsVisited.Add(regionName);
-    }
-
     public void SetDidInteractWithConsole(string sceneName, bool didInteractWithConsole)
     {
         sessionData.SceneResults[sceneName].DidInteractWithConsole = didInteractWithConsole;
@@ -130,6 +125,10 @@ public class VisionPulseResources : GenericSingleton<VisionPulseResources>
 
     public void WriteOutSessionData()
     {
+        // If you want want to write out the session data,
+        // remove the "return" statement
+#pragma warning disable CS0162
+        return;
         JsonSerializerSettings settings = new()
         {
             Converters = { new StringEnumConverter() },
@@ -141,6 +140,7 @@ public class VisionPulseResources : GenericSingleton<VisionPulseResources>
         string path = Path.Combine(projectRoot, sessionDataFileName);
 
         File.WriteAllText(path, json);
+#pragma warning restore CS0162
     }
 
     public string GetActiveSceneName()
@@ -480,8 +480,6 @@ public class VisionPulseResources : GenericSingleton<VisionPulseResources>
 
         public double CompletionTime { get; set; } = 0.0;
 
-        public List<string> RegionsVisited { get; set; } = new();
-
         public bool DidInteractWithConsole { get; set; } = false;
 
         public List<TimestampPosition> PlayerTimeAtPosition { get; set; } = new();
@@ -491,7 +489,6 @@ public class VisionPulseResources : GenericSingleton<VisionPulseResources>
         public void Reset()
         {
             CompletionTime = 0.0;
-            RegionsVisited.Clear();
             DidInteractWithConsole = false;
             PlayerTimeAtPosition.Clear();
             WaypointsTimeAtPosition.Clear();

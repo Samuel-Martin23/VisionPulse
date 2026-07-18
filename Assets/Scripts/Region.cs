@@ -152,21 +152,6 @@ public class Region : MonoBehaviour
         player = VisionPulseResources.SceneSetup.GetPlayer();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name != VisionPulseResources.XROrigin)
-        {
-            return;
-        }
-
-        string sceneName = VisionPulseResources.Instance.GetActiveSceneName();
-
-        if (sceneName != VisionPulseResources.TutorialSceneName)
-        {
-            VisionPulseResources.Instance.AddRegionInSceneData(sceneName, gameObject.name);
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (alreadyEntered)
